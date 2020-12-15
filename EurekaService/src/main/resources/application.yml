@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: EurekaService
+    
+server:
+ port: 8083
+ 
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://localhost:8083/eureka
+  server:
+      waitTimeInMsWhenSyncEmpty: 0
+      
+      
+zuul:
+  #Service will be mapped under the /api URI
+  prefix: /api
+  routes:
+    UserPreferenceService:
+      path: /UserPreferenceService/**
+      url: http://localhost:8081
+    MovieService:
+      path: /MovieService/**
+      url: http://localhost:8082
